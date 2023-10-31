@@ -9,6 +9,41 @@ export default function AddCoffee({ setCoffees }) { //creates and exports AddCof
             .catch(alert) //or print alert in case of error
     }
 
-    useEffect(() => { 
-        getCoffees()
-    }, []) //one time, after the component mounts, get the coffees
+useEffect(() => { //calls the React Hook useEffect which has Squid Game Syntax: () => {}, []
+    getCoffees() //calls get coffees function and executes(no need for button)
+}, [])  //one time, after the component mounts, get the coffees. [] - empty brackets mean the function will run only once until the component mounts. DO NOT FORGET TO PUT BRACKETS IN Syntax
+const handleSubmit = (e) => { //creates an arrow function that handles the event. Letter e is the event.
+    e.preventDefault() //prevents default behaviour of reloading the page and putting form data into URL section
+    // gather form data
+    // e.target is the form
+    // e.target.name is the input "name"
+    // e.target.name.value is the value of the input "name"
+    const name = e.target.name.value //extracts value from the 'name' line in the form and assigning it into corresponding variable
+    const recipe = e.target.recipe.value //extracts value from the 'recipe' line in the form and assigning it into corresponding variable
+    const description = e.target.description.value //extracts value from the 'description' line in the form and assigning into corresponding variable
+    //create a coffee object
+    const newCoffee = { name, recipe, description } //creates new object named newCoffee which takes in the extracted values of name, recipe and description.
+    console.log(newCoffee) //console logs the new object
+    // POST the newCoffee object to the API
+    fetch('https://first-deployed-api-aa.web.app/coffees', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newCoffee),
+    })
+        .then(res => res.json())
+        .then(data => //check if message is "Success!""
+        {
+            if (data.message === "Success!") {
+                //our coffee was added successfully
+                // let's clear the form
+                e.target.name.value = ''
+                e.target.recipe.value = ''
+                e.target.description.value = ''
+                // and the get an updated list of coffees...
+                getCoffees()
+            }
+        })
+        .catch(alert)
+}
