@@ -25,15 +25,15 @@ const handleSubmit = (e) => { //creates an arrow function that handles the event
     const newCoffee = { name, recipe, description } //creates new object named newCoffee which takes in the extracted values of name, recipe and description.
     console.log(newCoffee) //console logs the new object
     // POST the newCoffee object to the API
-    fetch('https://first-deployed-api-aa.web.app/coffees', {
-        method: 'POST',
+    fetch('https://first-deployed-api-aa.web.app/coffees', {//hitting the API with a post request with a new object restructured from the form data
+        method: 'POST', //specifies that the request is POST request
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json', //informing server that the body contains json datas
         },
-        body: JSON.stringify(newCoffee),
+        body: JSON.stringify(newCoffee), //converts newCoffeee object into json string and passes it as the body of the request
     })
-        .then(res => res.json())
-        .then(data => //check if message is "Success!""
+        .then(res => res.json()) 
+        .then(data => //checks if message is "Success!""
         {
             if (data.message === "Success!") {
                 //our coffee was added successfully
