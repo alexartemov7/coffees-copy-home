@@ -1,0 +1,14 @@
+header {
+    width: 100%; /* takes whole width of the viewport*/
+    min-height: 200px; /*sets minimum height to the object*/
+    background: rgb(121, 84, 231); /* gives color to the background */
+    border-radius: 12px; /* gives curvature to the element*/
+    display: flex; /* turning on flexbox*/
+    justify-content: center; /*positions the element at the center along X axis*/
+    align-items: center; /*positions the element at the center along Y axis*/
+}
+
+h1 {
+    font-style: italic;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
